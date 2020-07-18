@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: metropolis
+# key: metropolis
+# --
+\documentclass[10pt]{beamer}
+\usetheme{metropolis}
+\usepackage{pdfsync}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\uselanguage{russian}
+\languagepath{russian}
+\deftranslation[to=russian]{Theorem}{Теорема}
+\deftranslation[to=russian]{Lemma}{Лемма}
+\deftranslation[to=russian]{Corollary}{Следствие}
+\deftranslation[to=russian]{Definition}{Определение}
+\deftranslation[to=russian]{Example}{Пример}
+
+\usepackage{mathtools}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{caption}
+
+\title{$1}
+\subtitle{$2}
+\date{\today}
+\author{Н.~Д.~Ходюня}
+\institute{ИМиФИ СФУ}
+
+\begin{document}
+\maketitle
+$0
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

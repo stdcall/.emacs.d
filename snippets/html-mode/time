@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: time
+# key: time
+# --
+<time datetime="$1" pubdate>$0</time>

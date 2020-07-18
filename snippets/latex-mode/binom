@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: binom
+# key: binom
+# --
+\binom{$1}{$2}$0

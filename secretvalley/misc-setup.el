@@ -1,13 +1,57 @@
-;; Never insert tabs
+(setq initial-scratch-message "(setq debug-on-error t)")
+(setq large-file-warning-threshold nil)
+
+(setq vc-follow-symlinks t)
+
+;; Smooth Scroll: one line at a time:
+(setq mouse-wheel-scroll-amount '(1 ((shift) .1)))
+;; Remove alarm (bell) on scroll
+(setq ring-bell-function 'ignore)
+
 (set-default 'indent-tabs-mode nil)
 (set-default 'tab-width 2)
+(set-default 'fill-column 80)
 
-;; Do not trash my filesystem
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
-      auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "autosaves/\\1") t))
-      smex-save-file (concat user-emacs-directory ".smex-items"))
+(setq default-input-method "russian-computer")
+(setq tramp-default-method "ssh")
 
-(add-hook 'before-save-hook 'cleanup-buffer-safe)
+(set-default 'imenu-auto-rescan t)
+
+;; Sentences end with only one space
+(setq sentence-end-double-space nil)
+
+;; Set PATH
+(when (equal system-type 'darwin)
+  (let ((path-from-shell
+         (replace-regexp-in-string "[[:space:]\n]*$" ""
+                                   (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))
+    ))
+
+;; Set PKG_CONFIG_PATH
+(when (equal system-type 'darwin)
+  (let ((path-from-shell
+         (replace-regexp-in-string "[[:space:]\n]*$" ""
+                                   (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))
+    ))
+
+;; Do not trash my filesystem.
+(let ((backup-dir (concat user-emacs-directory "backups"))
+      (autosave-dir (concat user-emacs-directory "autosaves")))
+  (unless (file-exists-p backup-dir)
+    (make-directory backup-dir))
+  (unless (file-exists-p autosave-dir)
+    (make-directory autosave-dir))
+  (setq backup-directory-alist `(("." . ,backup-dir))
+        auto-save-file-name-transforms `((".*" ,(concat autosave-dir "/\\1") t))))
+
+(add-hook 'before-save-hook (lambda ()
+                              (unless (derived-mode-p 'makefile-mode)
+                                (cleanup-buffer-safe))))
+
 
 (defadvice kill-line (before check-position activate)
   (if (and (eolp) (not (bolp)))
@@ -15,15 +59,13 @@
              (just-one-space 0)
              (backward-char 1))))
 
-;; Spell checking
-(add-to-list 'exec-path "/opt/Aspell/bin")
-(setq ispell-program-name "aspell")
-(setq flyspell-default-dictionary "russian")
-(eval-after-load "ispell"
-  '(when (executable-find ispell-program-name)
-     (add-hook 'text-mode-hook 'turn-on-flyspell)))
+(defadvice split-window-right (after split-window-right-and-move-there-dammit activate)
+  (windmove-right))
 
-;; Miscellaneous
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(defadvice newline-and-indent (before auto-pair-ret activate)
+  (when (and (eq (char-after) ?}) (eq (char-before) ?{))
+    (save-excursion
+      (newline)
+      (indent-according-to-mode))))
 
 (provide 'misc-setup)

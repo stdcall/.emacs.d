@@ -3,9 +3,10 @@
 # key: html
 # --
 <!DOCTYPE html>
-<html>
+<html lang="${1:en}">
   <head>
-    <title>$1</title>
+    <meta charset="utf-8"/>
+    <title>$2</title>
   </head>
   <body>
     $0

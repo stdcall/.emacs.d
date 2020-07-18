@@ -1,3 +1,8 @@
+(defun add-hook-to-modes (modes function)
+  (dolist (mode modes)
+    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
+              function)))
+
 (defun untabify-buffer ()
   (interactive)
   (untabify (point-min) (point-max)))
@@ -19,7 +24,9 @@ might be bad."
   (interactive)
   (untabify-buffer)
   (delete-trailing-whitespace)
-  (set-buffer-file-coding-system 'utf-8))
+  ;; Doesn't work with TeX!
+  ;; (set-buffer-file-coding-system 'utf-8)
+  )
 
 (defun create-scratch-buffer nil
   "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
@@ -35,15 +42,54 @@ might be bad."
     (switch-to-buffer (get-buffer-create bufname))
     (emacs-lisp-mode)))
 
-(defun lorem-ipsum ()
-  "Insert a lorem ipsum."
+(defun sudo ()
+  "Use TRAMP to `sudo' the current buffer"
   (interactive)
-  (insert "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do "
-          "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim"
-          "ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "
-          "aliquip ex ea commodo consequat. Duis aute irure dolor in "
-          "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla "
-          "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
-          "culpa qui officia deserunt mollit anim id est laborum."))
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:"
+             buffer-file-name))))
+
+;; I like to use hsl colors, even in emacs themes
+(require 'color)
+(require 'cl)
+(defun hsl (h s l)
+  (let ((h (/ (float h) 360)) ;; documentation says hue must be in
+        ;; radians but it's not, angle in radians = angle-in-degrees*π/180°
+        (s (/ (float s) 100))
+        (l (/ (float l) 100)))
+    (apply 'color-rgb-to-hex (append (color-hsl-to-rgb h s l) '(2)))))
+
+(defun lighten (color percent)
+  (progn
+    (string-match "#\\(..\\)\\(..\\)\\(..\\)" color)
+    (let ((r (/ (string-to-number (match-string-no-properties 1 color) 16) 255.0))
+          (g (/ (string-to-number (match-string-no-properties 2 color) 16) 255.0))
+          (b (/ (string-to-number (match-string-no-properties 3 color) 16) 255.0)))
+      (multiple-value-bind (h s l)
+          (color-rgb-to-hsl r g b)
+        (apply 'color-rgb-to-hex
+               (apply 'color-hsl-to-rgb (color-lighten-hsl h s l percent)))))))
+
+(defun darken (color percent)
+  (progn
+    (string-match "#\\(..\\)\\(..\\)\\(..\\)" color)
+    (let ((r (/ (string-to-number (match-string-no-properties 1 color) 16) 255.0))
+          (g (/ (string-to-number (match-string-no-properties 2 color) 16) 255.0))
+          (b (/ (string-to-number (match-string-no-properties 3 color) 16) 255.0)))
+      (multiple-value-bind (h s l)
+          (color-rgb-to-hsl r g b)
+        (apply 'color-rgb-to-hex
+               (apply 'color-hsl-to-rgb (color-darken-hsl h s l percent)))))))
+
+(defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)
+        (next-line)))
 
 (provide 'misc-defuns)

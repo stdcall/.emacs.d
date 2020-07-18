@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: eqref
+# key: eqref
+# --
+\eqref{${1:label$(unless yas/modified-p (reftex-reference 'e 'dont-insert))}}$0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: \ref
+# key: ref
+# group: references
+# --
+\ref{${1:label$(unless yas/modified-p (reftex-reference nil 'dont-insert))}}$0

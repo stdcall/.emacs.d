@@ -1,0 +1,23 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mathlecture
+# group: template
+# key: mathlecture
+# --
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm} % теоремы
+\usepackage{cancel}
+\newtheorem{definition}{Определение}
+\newtheorem{theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{example}{Пример}[section]
+% производная в точке
+\newcommand\at[2]{\left.\kern-\nulldelimiterspace#1\right|_{#2}}
+
+\begin{document}
+\title{$1}
+\maketitle
+$0
+\end{document}

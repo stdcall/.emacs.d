@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: luagost
+# group: template
+# key: roboto
+# --
+\documentclass[a4paper,12pt]{article}
+\usepackage[english,main=russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{minted}
+\usemintedstyle{pastie}
+% \usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont[Ligatures=TeX]{Roboto}
+\setmonofont{Roboto Mono}
+\setmathfont[Scale=MatchLowercase]{Asana-Math.otf}
+\begin{document}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-command-extra-options: "-shell-escape"
+%%% TeX-master: t
+%%% End:

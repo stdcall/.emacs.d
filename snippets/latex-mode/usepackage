@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: usepackage
+# key: upkg
+# --
+\usepackage{$1}$0

@@ -1,0 +1,49 @@
+# -*- mode: snippet -*-
+# name: luagost
+# group: template
+# key: luagost
+# --
+\documentclass[a4paper]{article}
+\usepackage{pdfsync}
+\usepackage[utf8]{inputenc}
+\usepackage[english,main=russian]{babel}
+
+\usepackage[backend=biber,bibstyle=gost-numeric,language=auto,autolang=other,doi=false,isbn=false,url=false]{biblatex}
+\addbibresource{\jobname-en.bib}
+\addbibresource{\jobname-ru.bib}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \perdatasource{\jobname-en.bib}
+      \step[fieldset=langid, fieldvalue={english}]
+    }
+    \map{
+      \perdatasource{\jobname-ru.bib}
+      \step[fieldset=langid, fieldvalue={russian}]
+    }
+  }
+}
+
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{mathtools}
+
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{Lemma}[theorem]{Лемма}
+\newtheorem{corollary}{Следствие}[theorem]
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}[section]
+
+\begin{document}
+\title{}
+\author{}
+\maketitle
+$0
+%\nocite{*}
+\printbibliography
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

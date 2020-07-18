@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: \cite
+# key: cite
+# group: references
+# --
+\cite{${1:label$(unless yas/modified-p (car (reftex-citation 't)))}}$0

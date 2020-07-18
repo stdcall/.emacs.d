@@ -1,0 +1,35 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\usepackage{fontspec}
+% Set up fonts
+\usepackage{microtype}
+% Computer Modern Unicode font
+\setmainfont[Ligatures=TeX]{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
+% For archaic input (e.g. convert -- to en-dash)
+\defaultfontfeatures{Mapping=tex-text}
+
+
+% Set up polyglossia (modern babel replacement)
+\usepackage{polyglossia}
+\newfontfamily\cyrillicfont{CMU Serif}[Script=Cyrillic]
+\newfontfamily\cyrillicfontsf{CMU Sans Serif}[Script=Cyrillic]
+\setmainlanguage{russian}
+\setotherlanguage{english}
+
+% Setup hyperref for links in pdf
+\usepackage[xetex,colorlinks=false, allbordercolors={0 0
+  0},pdfborderstyle={/S/U/W 1},pdfencoding=auto,psdextra]{hyperref}
+
+% Setup minted
+\usepackage{xcolor}
+\definecolor{minted-bg}{rgb}{0.95,0.95,0.95}
+\usepackage{minted}
+\usemintedstyle{friendly}
+
+\usepackage{siunitx}
+\usepackage[backend=biber,bibstyle=gost-numeric,language=auto,autolang=other,doi=false,isbn=false,url=false]{biblatex}
+\usepackage[acronym,hyperfirst=false]{glossaries}
+\usepackage{glossaries-polyglossia}
+\makeglossaries
