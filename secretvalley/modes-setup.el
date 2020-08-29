@@ -345,18 +345,6 @@
   (add-hook 'markdown-mode-hook 'pandoc-mode)
   (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
 
-(use-package rust-mode
-  :ensure t
-  :pin melpa
-  :mode "\\.rs\\'"
-  :config
-  (setq rust-format-on-save t)
-  (use-package cargo
-    :ensure t
-    :pin melpa
-    :init
-    (add-hook 'rust-mode-hook 'cargo-minor-mode)))
-
 (use-package haskell-mode
   :ensure t
   :pin melpa
@@ -389,11 +377,6 @@
   :ensure t
   :pin melpa
   :mode "\\.sass\\'")
-
-;; The package is "python" but the mode is "python-mode":
-(use-package python
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode))
 
 ;; Coq
 (when (file-exists-p "/usr/local/opt/coq/lib/emacs/site-lisp")

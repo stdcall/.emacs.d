@@ -31,10 +31,7 @@
   (setq revert-without-query '(".*pdf$"))
   (require 'scroll-other-window)
   (sow-mode)
-  (use-package org-pdfview
-    :ensure t
-    :init
-    (eval-after-load 'org '(require 'org-pdfview)))
+
   (defhydra hydra-pdftools (:color blue :hint nil)
         "
                                                                       ╭───────────┐
