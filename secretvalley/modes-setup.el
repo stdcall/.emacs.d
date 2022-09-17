@@ -73,27 +73,6 @@
   :ensure t
   :pin melpa)
 
-(use-package emmet-mode
-  :ensure t
-  :pin melpa
-  :init
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'css-mode-hook  'emmet-mode))
-
-(use-package langtool
-  :pin melpa
-  :ensure t
-  :commands (langtool-check
-             langtool-check-done
-             langtool-switch-default-language
-             langtool-show-message-at-point
-             langtool-correct-buffer)
-  :init
-  (setq
-   langtool-language-tool-jar "/opt/langtool/languagetool-commandline.jar"
-   langtool-default-language "ru-RU"
-   langtool-mother-tongue "ru-RU"))
-
 (use-package hydra
   :ensure t
   :pin melpa)
@@ -113,10 +92,6 @@
   (add-hook 'after-init-hook 'server-start t)
   (add-hook 'after-init-hook 'edit-server-start t))
 
-(use-package hippie-exp
-  :ensure t
-  :pin melpa
-  :bind ([remap dabbrev-expand] . hippie-expand))
 
 (use-package diminish
   :ensure t
@@ -236,147 +211,6 @@
     :ensure t
     :init
     (helm-descbinds-mode)))
-
-(use-package company
-  :ensure t
-  :pin melpa
-  :commands (global-company-mode company-mode)
-  :init
-  )
-
-(use-package company-quickhelp
-  :ensure t
-  :after company
-  :pin melpa
-  :commands company-quickhelp-mode
-  :init
-  (add-hook 'company-mode-hook 'company-quickhelp-mode))
-
-(use-package yasnippet
-  :ensure t
-  :pin melpa
-  :diminish yas-minor-mode
-  :init
-  ;; (require 'buster-snippets)
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-  (setq yas-prompt-functions '(yas/ido-prompt yas/completing-prompt))
-  (setq yas-wrap-around-region t)
-  :config
-  (yas-global-mode 1))
-
-(use-package org
-  :ensure org-plus-contrib
-  :pin org
-  :mode ("\\.org\\'". org-mode)
-  :bind (("C-c c" . org-capture)
-         ("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
-         ("C-c b" . org-iswitchb)
-         :map org-mode-map
-         ("S-<right>" . nil)
-         ("S-<left>"  . nil)
-         ("S-<up>"    . nil)
-         ("S-<down>"  . nil))
-  :init
-  (setq org-file-apps
-        '((auto-mode . emacs)
-          ("\\.djvu\\'" . "evince \"%s\"")
-          ("\\.djvu::\\([0-9]+\\)\\'" . "evince \"%s\" -p %1")))
-
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '((python . t)
-                                 (emacs-lisp . t)))
-  (require 'ox-extra)
-  (ox-extras-activate '(ignore-headlines))
-
-  ;;(require 'org-glossary nil t)
-
-  (setq org-latex-listings 'minted)
-  (setq org-latex-minted-options
-        '(("bgcolor" "minted-bg") ("frame" "single") ("framesep" "6pt")
-          ("mathescape" "true") ("fontsize" "\\footnotesize")))
-  (setq org-latex-pdf-process
-        '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-          "biber %b"
-          "makeglossaries %b"
-          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-  (add-to-list 'org-latex-classes
-               `("org-koma"
-                 ,(concat  (with-temp-buffer
-                            (insert-file-contents
-                             (concat user-emacs-directory "org-koma.tex"))
-                            (buffer-string))
-                          "[NO-DEFAULT-PACKAGES] [NO-PACKAGES]")
-
-     ("\\section{%s}" . "\\section*{%s}")
-     ("\\subsection{%s}" . "\\subsection*{%s}")
-     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-     ("\\paragraph{%s}" . "\\paragraph*{%s}")
-     ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-  :config
-  (add-to-list 'org-latex-packages-alist
-  '("english,main=russian" "babel"))
-  (setq org-agenda-files '("~/Dropbox/notes")
-        org-confirm-babel-evaluate nil
-        org-format-latex-options (plist-put
-        org-format-latex-options :scale 1.5) ) )
-
-(use-package org-ref
-    :pin melpa
-    :ensure t)
-
-(use-package markdown-mode
-  :ensure t
-  :pin melpa
-  :mode ("\\.md\\'" . markdown-mode)
-  ("\\.markdown\\'" . markdown-mode)
-  :init
-  (setq markdown-enable-math t)
-  :config
-  )
-
-(use-package pandoc-mode
-  :ensure t
-  :after markdown-mode
-  :pin melpa
-  :diminish pandoc-mode
-  :commands pandoc-mode
-  :init
-  (add-hook 'markdown-mode-hook 'pandoc-mode)
-  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
-
-(use-package haskell-mode
-  :ensure t
-  :pin melpa
-  :mode "\\.hs\\'"
-  :init
-  (dolist (hook '(haskell-indentation-mode
-                  interactive-haskell-mode
-                  haskell-doc-mode
-                  haskell-decl-scan-mode
-                  flycheck-mode))
-    (add-hook 'haskell-mode-hook hook))
-
-  :config
-  (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
-  (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right))
-
-(use-package intero
-  :ensure t
-  :pin melpa
-  :after haskell-mode
-  :commands 'intero-mode
-  :init
-  (add-hook 'haskell-mode-hook 'intero-mode)
-  (add-hook 'intero-mode-hook
-   '(lambda () (flycheck-add-next-checker 'intero
-                '(warning . haskell-hlint)))))
-
-
-(use-package sass-mode
-  :ensure t
-  :pin melpa
-  :mode "\\.sass\\'")
 
 ;; Coq
 (when (file-exists-p "/usr/local/opt/coq/lib/emacs/site-lisp")

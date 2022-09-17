@@ -49,8 +49,7 @@
  '(ansi-color-names-vector
    ["black" "red" "#b3e29c" "yellow" "PaleBlue" "magenta" "cyan" "white"])
  '(package-selected-packages
-   (quote
-    (json-mode osx-trash magit powershell smex ebib auctex org-pdfview gnuplot pandoc-mode sass-mode ocp-indent utop merlin tuareg csharp-mode haskell-mode rust-mode racket-mode js2-mode markdown-mode org-ref org-plus-contrib yasnippet company-quickhelp helm-bibtex helm-descbinds helm-flx smartparens rainbow-mode expand-region diminish edit-server counsel ivy-hydra discover helm-wordnet gap-mode ob-sagemath auto-complete-sage sage-shell-mode google-translate helm-dictionary langtool find-file-in-project use-package ido-vertical-mode hydra helm-rtags flx-ido emmet-mode company-rtags))))
+   '(json-mode osx-trash magit smex ebib auctex org-pdfview gnuplot pandoc-mode sass-mode ocp-indent markdown-mode org-ref org-plus-contrib yasnippet company-quickhelp helm-bibtex helm-descbinds helm-flx smartparens rainbow-mode expand-region diminish edit-server counsel ivy-hydra discover helm-wordnet gap-mode ob-sagemath auto-complete-sage sage-shell-mode google-translate helm-dictionary langtool find-file-in-project use-package ido-vertical-mode hydra helm-rtags flx-ido emmet-mode company-rtags)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

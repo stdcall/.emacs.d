@@ -18,3 +18,5 @@ semanticdb/
 session*
 url/
 transient/
+tramp
+eln-cache/

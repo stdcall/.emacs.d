@@ -1,7 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: ds
-# key: ds
-# --
-typedef struct {
-$0
-}
