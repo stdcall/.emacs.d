@@ -20,7 +20,7 @@
 (set-default 'indicate-empty-lines nil)
 (set-face-attribute 'default nil
                     :family (cond ((eq system-type 'windows-nt) "Cascadia Code")
-                                  ((eq system-type 'gnu/linux) "Inconsolata LGC") ;; Inconsolata LGC
+                                  ((eq system-type 'gnu/linux) "Ubuntu Mono") ;; Inconsolata LGC
                                   ((eq system-type 'darwin) "Menlo")
                                   (t "Mono"))
                     :weight 'normal
