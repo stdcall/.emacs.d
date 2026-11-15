@@ -1,4 +1,4 @@
-;;; typopunct.el --- Automatic typographical punctuation marks
+;;; typopunct.el --- Automatic typographical punctuation marks  -*- lexical-binding: nil; -*-
 
 ;; Copyright (C) 2003  Free Software Foundation, Inc.
 

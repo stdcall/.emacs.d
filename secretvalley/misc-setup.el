@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (setq initial-scratch-message "(setq debug-on-error t)")
 (setq large-file-warning-threshold nil)
 

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (if (string= (getenv "computername") "Sibintek")
     (setq url-proxy-services '(("http" . "10.46.51.100:3128"))))
 

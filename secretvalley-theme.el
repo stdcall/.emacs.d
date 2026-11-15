@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; Created by Nikolay Khodyunya, May 2013
 ;;
 

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (auto-fill-mode 1)
 
 (use-package osx-trash

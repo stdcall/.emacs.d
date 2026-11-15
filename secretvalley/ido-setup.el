@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (ido-mode t)
 
 (use-package smex

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (dolist (key '("<left>"
                "<right>"
                "<up>"

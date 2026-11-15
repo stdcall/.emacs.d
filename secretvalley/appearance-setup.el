@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (load-theme 'secretvalley t)
 ;; Do not create new frames when opening files
 (setq ns-pop-up-frames nil)

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (use-package pdf-tools
   :ensure t
   :pin melpa

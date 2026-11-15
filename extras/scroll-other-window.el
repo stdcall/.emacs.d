@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ; Copyright (C) 2016  Andreas Politz
 
 ;; Author: Andreas Politz <politza@fh-trier.de>

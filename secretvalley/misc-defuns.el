@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (defun add-hook-to-modes (modes function)
   (dolist (mode modes)
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
@@ -52,7 +53,7 @@ might be bad."
 
 ;; I like to use hsl colors, even in emacs themes
 (require 'color)
-(require 'cl)
+(require 'cl-lib)
 (defun hsl (h s l)
   (let ((h (/ (float h) 360)) ;; documentation says hue must be in
         ;; radians but it's not, angle in radians = angle-in-degrees*π/180°
@@ -66,7 +67,7 @@ might be bad."
     (let ((r (/ (string-to-number (match-string-no-properties 1 color) 16) 255.0))
           (g (/ (string-to-number (match-string-no-properties 2 color) 16) 255.0))
           (b (/ (string-to-number (match-string-no-properties 3 color) 16) 255.0)))
-      (multiple-value-bind (h s l)
+      (cl-multiple-value-bind (h s l)
           (color-rgb-to-hsl r g b)
         (apply 'color-rgb-to-hex
                (apply 'color-hsl-to-rgb (color-lighten-hsl h s l percent)))))))
@@ -77,7 +78,7 @@ might be bad."
     (let ((r (/ (string-to-number (match-string-no-properties 1 color) 16) 255.0))
           (g (/ (string-to-number (match-string-no-properties 2 color) 16) 255.0))
           (b (/ (string-to-number (match-string-no-properties 3 color) 16) 255.0)))
-      (multiple-value-bind (h s l)
+      (cl-multiple-value-bind (h s l)
           (color-rgb-to-hsl r g b)
         (apply 'color-rgb-to-hex
                (apply 'color-hsl-to-rgb (color-darken-hsl h s l percent)))))))

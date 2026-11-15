@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;; http://endlessparentheses.com/a-comment-or-uncomment-sexp-command.html
 
 (defun uncomment-sexp (&optional n)
