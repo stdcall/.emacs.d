@@ -43,12 +43,26 @@
 (global-set-key "\C-x4\C-j" 'dired-jump-other-window)
 (setq dired-dwim-target t)
 
-(if (eq system-type 'windows-nt)
-    (progn
-      (setq ls-lisp-use-insert-directory-program t)
-      (setq insert-directory-program "C:/msys64/usr/bin/ls.exe")
-      (setq default-file-name-coding-system 'utf-8)
-      ))
+(when (eq system-type 'windows-nt)
+  (let ((ls-program
+         (cl-find-if
+          (lambda (program)
+            (and program
+                 (file-executable-p program)
+                 (with-temp-buffer
+                   (condition-case nil
+                       (and (eq 0 (call-process program nil t nil "--version"))
+                            (progn
+                              (goto-char (point-min))
+                              (looking-at-p "ls (GNU coreutils)")))
+                     (file-error nil)))))
+          (list (executable-find "ls.exe")
+                ;; MSYS2's usr/bin is alongside the MinGW or UCRT prefix.
+                (expand-file-name "../../usr/bin/ls.exe" invocation-directory)))))
+    (setq ls-lisp-use-insert-directory-program (and ls-program t))
+    (when ls-program
+      (setq insert-directory-program ls-program)))
+  (setq default-file-name-coding-system 'utf-8))
 
 (if (eq system-type 'darwin)
     (setq insert-directory-program "gls"))
