@@ -54,7 +54,8 @@
                        (and (eq 0 (call-process program nil t nil "--version"))
                             (progn
                               (goto-char (point-min))
-                              (looking-at-p "ls (GNU coreutils)")))
+                              (or (looking-at-p "ls (uutils coreutils)")
+                                  (looking-at-p "ls (GNU coreutils)"))))
                      (file-error nil)))))
           (list (executable-find "ls.exe")
                 ;; MSYS2's usr/bin is alongside the MinGW or UCRT prefix.
